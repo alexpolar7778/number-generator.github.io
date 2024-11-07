@@ -6,7 +6,9 @@ let computerScore = 0;
 
 document.getElementById("message").innerText = "";
 
-document.getElementById("generate").addEventListener("click", () => {
+document.getElementById("generate").addEventListener("click", playGame);
+
+function playGame() {
   let userNumber = Math.floor(Math.random() * 10) + 1;
   let computerNumber = Math.floor(Math.random() * 10) + 1;
 
@@ -29,9 +31,14 @@ document.getElementById("generate").addEventListener("click", () => {
       : `Комп'ютер перемагає з рахунком ${computerScore} : ${userScore}!`;
 
     document.getElementById("message").innerText = winnerMessage;
-    setTimeout(resetGame, 8000);
+
+    document.getElementById("generate").disabled = true;
+    setTimeout(() => {
+      resetGame();
+      document.getElementById("generate").disabled = false;
+    }, 2500);
   }
-});
+}
 
 function resetGame() {
   userScore = 0;
